@@ -41,6 +41,10 @@ export default class Trabajadores extends Component {
         if ((prevProps.selectedHospitales) != (this.props.selectedHospitales)) {
             this.loadTrabajadoresHospitales();
         }
+
+        if ((prevProps.incrementar) != (this.props.incrementar)) {
+            this.loadTrabajadoresHospitales();
+        }
     }
 
 

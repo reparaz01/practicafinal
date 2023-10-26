@@ -7,7 +7,7 @@ export default class Hospitales extends Component {
         hospitales: [],           // hospitales seleccionados
         allHospitales: [],         // todos los hospitales 
         selectedHospitalIds: [],
-        statusactualizarSalario: false // ID de los hospitales seleccionados
+        incrementar : false   // ID de los hospitales seleccionados
     };
 
     cajaAumento = React.createRef();
@@ -28,11 +28,9 @@ export default class Hospitales extends Component {
             }
         }
 
-        console.log(url + request);
-
         axios.put(url + request).then(response => {
             this.setState({
-                statusactualizarSalario: true
+                incrementar : true
             })
         })
     }
@@ -65,7 +63,7 @@ export default class Hospitales extends Component {
 
         return (
 
-
+        
             <div className="container">
                 <div className="form-set">
                     <br></br>
@@ -84,7 +82,10 @@ export default class Hospitales extends Component {
                 <br></br>
                 <label> Introduce el Aumento de Salario </label>
                 &nbsp; <input type='text' ref={this.cajaAumento} />
-                &nbsp; <button onClick={this.aumentarSalario}> Auementar</button>
+                &nbsp; <button onClick={(e) => {
+                    this.aumentarSalario(e);
+                    this.setState({ incrementar: false });
+                }}>Aumentar</button>
 
 
                 {this.state.hospitales.length > 0 && (
@@ -112,7 +113,8 @@ export default class Hospitales extends Component {
                             </tbody>
                         </table>
                         <hr />
-                        <Trabajadores selectedHospitales={this.state.selectedHospitalIds} />
+                                <Trabajadores selectedHospitales={this.state.selectedHospitalIds} incrementar={this.state.incrementar}/>
+                       
                     </div>
                 )}
             </div>
